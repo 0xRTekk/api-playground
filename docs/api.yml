@@ -4,7 +4,7 @@ info:
   description: The APi for our todolist
   version: 1.0.0
 servers:
-  - url: htt://localhost:3000
+  - url: http://localhost:3000
 tags:
   - name: tasks
     description: Everything about Tasks
@@ -15,8 +15,8 @@ paths:
     get:
       tags:
         - tasks
-      summary: Toutes les tâches
-      description: Retourne toutes les tâches de l'ensemble des utilisateurs
+      summary: All tasks
+      description: Return all the tasks for all the users
       responses:
         "200":
           description: OK
@@ -26,6 +26,27 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Task"
+  /tasks/{id}:
+    get:
+      tags:
+        - tasks
+      summary: One task
+      description: FInd a task by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of tasks to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
 components:
   schemas:
     Task:

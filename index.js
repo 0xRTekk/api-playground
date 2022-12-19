@@ -15,6 +15,12 @@
  * 2. Créer le endpoint pour la requête GET /tasks
  * 3. On répond les datas au format JSON
  * 4. On test notre endpoint avec un client HTTP
+ * 
+ * ! Objectif #3
+ * * Exo autonomie : Faire le endpoint GET /tasks/:id avec sa documentation
+ * 1. Créer le endpoint GET /tasks/:id
+ * 2. Créer la documentation
+ * 3. Tester avec un client HTTP
  */
 
 // Application Expresse, on importe le package
@@ -27,7 +33,7 @@ const tasks = require('./data/tasks.json');
 const PORT = 3000;
 
 
-//* === ENDPOINTS ===
+//* === Tasks ===
 app.get('/tasks', function(request, response) {
   console.log(`${request.method} ${request.originalUrl}`);
 
@@ -36,6 +42,17 @@ app.get('/tasks', function(request, response) {
   // Si on ne renvois rien au client, le processus de réponse tourne indéfiniment.
   // Pour terminer ce process, on utilise la méthode end() de l'objet Response
   // response.end();
+});
+// On peut mettre en place des endpoints dynamiques avec les ":" pour le param d'URL
+app.get('/tasks/:id', function(req, res) {
+  console.log(`${req.method} ${req.originalUrl}`);
+
+  //https://expressjs.com/fr/4x/api.html#req.params
+  // le param d'URL est de type string, il faut faire la conversion
+  const taskId = parseInt(req.params.id, 10);
+  const task = tasks.find((task) => task.id === taskId);
+  // On renvois au client la tâche au format JSON
+  res.json(task);
 });
 
 
