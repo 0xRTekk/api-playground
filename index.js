@@ -21,17 +21,30 @@
  * 1. Créer le endpoint GET /tasks/:id
  * 2. Créer la documentation
  * 3. Tester avec un client HTTP
+ * 
+ * ! Objectif #4
+ * * CORS
+ * On va s'attaquer à ce petit soucis de CORS
+ * 1. Découverte du concept et des enjeux
+ * 2. Fiche recap markdown
+ * 3. Mise en place des CORS sur notre API avec le package cors
+ * https://expressjs.com/en/resources/middleware/cors.html
+ * 4. On test
  */
 
 // Application Expresse, on importe le package
 const express = require('express');
 // On initialise l'application Express
 const app = express();
+// On importe le package pour gérer les CORS
+const cors = require('cors');
 // On importe nos datas
 const tasks = require('./data/tasks.json');
 // On déifnit le port
 const PORT = 3000;
 
+// On définit les CORS pour permettre les domaines externes à requêter notre serveur
+app.use(cors());
 
 //* === Tasks ===
 app.get('/tasks', function(request, response) {
