@@ -50,28 +50,37 @@
  * 3. Rajouter cette tâche à la liste (pas de persitence en DB mais on manipule un tableau de tâches à la place)
  * 4. Répondre au client : si tout est ok code HTTP 201 avec la nouvelle tâche en JSON. Sinon code 500
  * 5. Documentation Swagger
+ * 
+ * ! Objetcif #2
+ * On va parler architecture
+ * Notre code va vite devenir fouilli au fur et à mesure. Il va falloir réflichir à comment ranger 
+ * correctement notre code pour maintenant une bonne lisibilité, maintenabilité et évolutivité !
+ * Actuellement dans le même fichier on a :
+ * - La mise en place du serveur
+ * - La liste de nos endpoints
+ * - Les fonctions métiers (celles qui manipulent les datas)
+ * On va se créer des fichiers pour contenir chaque "logique"
+ * - index.js => Le point d'entrée et lancement du serveur
+ * - app/server.js => Initialisation du serveur et branchement des middlewares globaux
+ * - app/router.js => La liste de nos routes
+ * - app/controllers/ => Controllers contenant les fonctions métiers (manip de datas)
+ * 
+ * Les middlewares sont des fonctions misent les unes à la suite des autres.
+ * Elles ont accès à la requête HTTP courante, à la réponse et à une fonction next()
+ * qui permet de passer l'execution du code au prochian middleware.
+ * Chaque middleware peut donc soit :
+ * - Passer l'execution du code au prochain middleware
+ * - Déclencher un process de réponse et donc ne pas passer le code au prochain middleware
+ * https://expressjs.com/fr/guide/using-middleware.html
+ * https://cdn-images-1.medium.com/max/1600/0*8HIzvtX-DA3C26uv.png
  */
 
-// Application Expresse, on importe le package
-const express = require('express');
-// On initialise l'application Express
-const app = express();
-// On importe le package pour gérer les CORS
-const cors = require('cors');
-// On importe nos datas
-const tasks = require('./data/tasks.json');
+// Import du server
+const app = require('./app/server');
 // On déifnit le port
 const PORT = 3000;
 
-// On définit les CORS pour permettre les domaines externes à requêter notre serveur
-app.use(cors());
-// On met place un middleware de body-parsing.
-// express.json() va nous retourner les pairs clé/valeurs au format JSON dans le corps de la requête.
-// On est obligé de parser l'entrée utilisateur pour des raisons de sécurité (Never Trust The User Input)
-// => Comme ça on n'enregistre par de code malicieux
-// https://expressjs.com/en/4x/api.html#express.json
-app.use(express.json());
-
+const tasks = require('./data/tasks.json');
 //* === Tasks ===
 app.get('/tasks', function(request, response) {
   console.log(`${request.method} ${request.originalUrl}`);
