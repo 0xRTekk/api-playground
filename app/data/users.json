@@ -1,22 +1,30 @@
 [
   {
     "id": 1,
+    "firstName": "Edgar",
+    "lastName": "Poe",
     "login": "Paldado",
-    "password": "paldado1856"
+    "password": "$2b$10$nKzLVurHJLNyB7zEUMIHLeotK8ZlVl4R4t1x5nONupqtm8PdvqZLK"
   },
   {
     "id": 2,
+    "firstName": "John",
+    "lastName": "Anderson",
     "login": "Tron",
-    "password": "neon"
+    "password": "$2b$10$S65CLOKfgBI/nuPGxmQkPOBxfibcoGkMJ1Ec.XF2C8Kcs5KHDNlQO"
   },
   {
     "id": 3,
+    "firstName": "Léo",
+    "lastName": "Gentil",
     "login": "DarkSasuke",
-    "password": "manga"
+    "password": "$2b$10$vwEatERJwlbUm01XUX2Xy.FrM8iBXycpKvkbdm4O7y6iQ/mKVJHLW"
   },
   {
     "id": 8,
+    "firstName": "Marie",
+    "lastName": "Curie",
     "login": "Lolpopix16",
-    "password": "plop"
+    "password": "$2b$10$u./FonYHYxdJ9Ds54DhAzemyDpmNBoyXVWd3rqrODuoSzwogJVLeK"
   }
 ]
