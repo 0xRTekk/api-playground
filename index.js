@@ -1,4 +1,8 @@
 /**
+ * ! Jour 1
+ * 
+ * * =======
+ * 
  * ! Objectif #1
  * Créer une application Express et la faire écouter sur le port 3000
  * 1. On install Express
@@ -32,6 +36,22 @@
  * 4. On test
  */
 
+/**
+ * ! Jour 2
+ * 
+ * ========
+ * 
+ * ! Objectif #1
+ * Endpoint POST /tasks. On veut rajouter une tâche dans la liste.
+ * On va devoir passer le label de la nouvelle tâche dans le corps de la requête
+ * Pour tester ça, on va passer par un client HTTP
+ * 1. Créer le endpoint
+ * 2. Recupérer le corps de la requête (et donc le label de la nouvelle tâche)
+ * 3. Rajouter cette tâche à la liste (pas de persitence en DB mais on manipule un tableau de tâches à la place)
+ * 4. Répondre au client : si tout est ok code HTTP 201 avec la nouvelle tâche en JSON. Sinon code 500
+ * 5. Documentation Swagger
+ */
+
 // Application Expresse, on importe le package
 const express = require('express');
 // On initialise l'application Express
@@ -45,6 +65,12 @@ const PORT = 3000;
 
 // On définit les CORS pour permettre les domaines externes à requêter notre serveur
 app.use(cors());
+// On met place un middleware de body-parsing.
+// express.json() va nous retourner les pairs clé/valeurs au format JSON dans le corps de la requête.
+// On est obligé de parser l'entrée utilisateur pour des raisons de sécurité (Never Trust The User Input)
+// => Comme ça on n'enregistre par de code malicieux
+// https://expressjs.com/en/4x/api.html#express.json
+app.use(express.json());
 
 //* === Tasks ===
 app.get('/tasks', function(request, response) {
@@ -67,7 +93,34 @@ app.get('/tasks/:id', function(req, res) {
   // On renvois au client la tâche au format JSON
   res.json(task);
 });
+app.post('/tasks', function(req, res) {
+  console.log(`${req.method} ${req.originalUrl}`);
 
+  if(req.body.label === undefined || req.body.label === "") {
+    return res.status(400).end('The task\'s name is empty');
+  };
+
+  // On prépare la nouvelle tâche
+  const newTask = {
+    id: 99, // On vera plus tard comment faire ça prorpement
+    label: req.body.label,
+    done: false,
+    userId: 1
+  };
+
+  // On l'a rajoute dans le tableau des tâches
+  try {
+    tasks.push(newTask);
+    // Si la création de la ressource est ok
+    // on répond un code 201 Created et on envoi la nouvelle tâche
+    res.status(201).json(newTask);
+  } catch (error) {
+    // Si la création ne passe pas
+    // on répond un code 500 Internal Error et on termine le processus de réponse
+    console.error(error);
+    res.status(500).end(error);
+  }
+});
 
 
 // On met en écoute le serveur sur le port définit plus haut

@@ -26,6 +26,29 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Task"
+    post:
+      tags:
+        - tasks
+      summary: Create a new task
+      requestBody:
+        description: Should contain the new task informations
+        content:
+          application/json:
+            schema:
+              type : object
+              example: {"label" : 'My task'}
+      description: Create a new task and return it
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Error
   /tasks/{id}:
     get:
       tags:
