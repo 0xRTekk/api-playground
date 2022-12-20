@@ -1,8 +1,8 @@
 // Packages
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
 // Imports
-const router = require('./router');
+import router from './router.js';
 
 // Init du serveur
 const app = express();
@@ -12,4 +12,4 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
-module.exports = app;
+export default app;

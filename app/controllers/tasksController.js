@@ -1,4 +1,4 @@
-const tasks = require('../data/tasks.json');
+import tasks from '../data/tasks.json' assert { type: "json" };
 
 const tasksController = {
   getAllTasks: (req, res) => {
@@ -45,4 +45,4 @@ const tasksController = {
   },
 };
 
-module.exports = tasksController;
+export default tasksController;
