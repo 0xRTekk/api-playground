@@ -2,18 +2,14 @@ import tasks from '../data/tasks.json' assert { type: "json" };
 
 const tasksController = {
   getAllTasks: (req, res) => {
-    console.log(`${req.method} ${req.originalUrl}`);
     res.send(tasks);
   },
   getTaskById: (req, res) => {
-    console.log(`${req.method} ${req.originalUrl}`);
     const taskId = parseInt(req.params.id, 10);
     const task = tasks.find((task) => task.id === taskId);
     res.json(task);
   },
   createTask: (req, res) => {
-    console.log(`${req.method} ${req.originalUrl}`);
-
     if(req.body.label === undefined || req.body.label === "") {
       return res.status(400).end('The task\'s name is empty');
     };

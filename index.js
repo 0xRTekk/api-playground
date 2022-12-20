@@ -73,6 +73,19 @@
  * - Déclencher un process de réponse et donc ne pas passer le code au prochain middleware
  * https://expressjs.com/fr/guide/using-middleware.html
  * https://cdn-images-1.medium.com/max/1600/0*8HIzvtX-DA3C26uv.png
+ * 
+ * ! Objetcif #3
+ * Middleware de logs
+ * On va se mettre en place un middleware pour log des infos à chaque requête:
+ * - La date
+ * - La méthode
+ * - Le endpoint
+ * - L'IP du client
+ * 1. Créer un fichier middlewares/logger.js
+ * 2. Un middleware reçoit la requete courante, la réponse et la fonction next()
+ * 3. Log en console les infos
+ * 4. Brancher le middleware
+ * 5. Tester
  */
 
 // Import du server
