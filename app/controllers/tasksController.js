@@ -2,7 +2,7 @@ import tasks from '../data/tasks.json' assert { type: "json" };
 
 const tasksController = {
   getAllTasks: (req, res) => {
-    if(!tasks) {
+    if (!tasks) {
       return res.status(404).end();
     }
     res.send(tasks);
@@ -18,7 +18,7 @@ const tasksController = {
     }
   },
   createTask: (req, res) => {
-    if(req.body.label === undefined || req.body.label === "") {
+    if (req.body.label === undefined || req.body.label === "") {
       return res.status(400).end('The task\'s name is empty');
     };
 
@@ -47,6 +47,54 @@ const tasksController = {
       res.status(500).end(error);
     }
   },
+
+  modifyTask: function (req, res) {
+    const id = parseInt(req.params.id, 10);
+    const task = tasks.find((task) => task.id === id);
+    if (!task) {
+      res.status(404).send(`Can't find the task#${id}`);
+    } else {
+      // On ne change que les paramètres présents
+      if (req.body.label) {
+        task.label = req.body.label;
+      }
+      if (req.body.done) {
+        task.done = req.body.done;
+      }
+
+      res.send(task);
+    }
+  },
+
+  createOrModifyTask: function (req, res) {
+    const id = parseInt(req.params.id, 10);
+    const task = tasks.find((task) => task.id === id);
+    if (task) {
+      taskController.modifyTask(req, res);
+    } else {
+      taskController.createTask(req, res);
+    }
+  },
+
+  deleteTask: function (req, res) {
+    const id = parseInt(req.params.id, 10);
+    const task = tasks.find((task) => task.id === id);
+    if (!task) {
+      res.status(404).send(`Can't find the task#${id}`);
+    } else {
+      // On parcours notre tableau de tâches
+      for (let i = 0; i < tasks.length; i++) {
+        // On trouve la tâche qui nous interesse
+        if (tasks[i].id === id) {
+          // On l'enlève du tableau
+          tasks.splice(i, 1);
+        }
+      }
+      res.send('OK');
+    }
+  },
+
+
 };
 
 export default tasksController;
