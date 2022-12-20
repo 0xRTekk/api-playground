@@ -18,9 +18,13 @@ const tasksController = {
       return res.status(400).end('The task\'s name is empty');
     };
 
+    // On recup les ids existants et on recup le plus haut pour calculer le nouveau
+    const tasksIds = tasks.map((task) => task.id);
+    const maxId = Math.max(...tasksIds) + 1;
+
     // On prépare la nouvelle tâche
     const newTask = {
-      id: 99, // On vera plus tard comment faire ça prorpement
+      id: maxId,
       label: req.body.label,
       done: false,
       userId: 1
