@@ -97,6 +97,12 @@
  * 3. On nettoie le body de chaque requetes
  * 4. On branche notre middleware sanitize
  * 5. On test
+ * 
+ * ! Objectif #5
+ * Finir l'API
+ * Les endpoints PUT, PATCH & DELETE pour les tasks
+ * Tous les endpoints pour les users
+ * On n'oublie pas la documentation !
  */
 
 // Import du server
