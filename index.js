@@ -86,6 +86,17 @@
  * 3. Log en console les infos
  * 4. Brancher le middleware
  * 5. Tester
+ * 
+ * ! Objectif #4
+ * On va parler validation des données & sécurité
+ * Never Trust the User Input => Il faut qu'on nettoie, valide les entrée utilisateurs
+ * pour ne pas enregistrer du code mailveillant en DB
+ * On va utiliser un package de sanitize pour nettoyer les inputs
+ * 1. On install le package sanitizer
+ * 2. On créer le middleware de sanitize
+ * 3. On nettoie le body de chaque requetes
+ * 4. On branche notre middleware sanitize
+ * 5. On test
  */
 
 // Import du server

@@ -4,6 +4,7 @@ import cors from 'cors';
 // Imports
 import router from './router.js';
 import logger from './middlewares/logger.js';
+import bodySanitizer from './middlewares/bodySanitizer.js';
 
 // Init du serveur
 const app = express();
@@ -12,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(logger);
+app.use(bodySanitizer);
 app.use(router);
 
 export default app;
