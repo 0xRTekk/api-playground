@@ -2,12 +2,20 @@ import tasks from '../data/tasks.json' assert { type: "json" };
 
 const tasksController = {
   getAllTasks: (req, res) => {
+    if(!tasks) {
+      return res.status(404).end();
+    }
     res.send(tasks);
   },
   getTaskById: (req, res) => {
     const taskId = parseInt(req.params.id, 10);
-    const task = tasks.find((task) => task.id === taskId);
-    res.json(task);
+
+    try {
+      const task = tasks.find((task) => task.id === taskId);
+      res.json(task);
+    } catch (error) {
+      res.status(404).end(error);
+    }
   },
   createTask: (req, res) => {
     if(req.body.label === undefined || req.body.label === "") {
