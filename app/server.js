@@ -1,10 +1,10 @@
 // Packages
-import express from 'express';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
 // Imports
-import router from './router.js';
-import logger from './middlewares/logger.js';
-import bodySanitizer from './middlewares/bodySanitizer.js';
+const router = require('./router.js');
+const logger = require('./middlewares/logger.js');
+const bodySanitizer = require('./middlewares/bodySanitizer.js');
 
 // Init du serveur
 const app = express();
@@ -16,4 +16,4 @@ app.use(logger);
 app.use(bodySanitizer);
 app.use(router);
 
-export default app;
+module.exports = app;

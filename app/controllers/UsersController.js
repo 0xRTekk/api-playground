@@ -1,9 +1,9 @@
 // Importing the NPM bcrypt package.
-import bcrypt from 'bcrypt';
+const bcrypt = require('bcrypt');
 // We are setting salt rounds, higher is safer.
 const saltRounds = 10;
 
-import users from '../data/users.json' assert { type: "json" };
+const users = require ('../data/users.json');
 
 const UsersController = {
   // Retourne tous les utilisateurs
@@ -135,4 +135,4 @@ const UsersController = {
 
 };
 
-export default UsersController;
+module.exports = UsersController;

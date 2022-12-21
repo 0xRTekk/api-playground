@@ -1,4 +1,4 @@
-import tasks from '../data/tasks.json' assert { type: "json" };
+const tasks = require('../data/tasks.json');
 
 const tasksController = {
   getAllTasks: (req, res) => {
@@ -97,4 +97,4 @@ const tasksController = {
 
 };
 
-export default tasksController;
+module.exports = tasksController;

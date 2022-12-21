@@ -1,6 +1,6 @@
-import express from 'express';
-import tasksController from './controllers/tasksController.js';
-import UsersController from './controllers/UsersController.js';
+const express = require('express');
+const tasksController = require('./controllers/tasksController.js');
+const UsersController = require('./controllers/UsersController.js');
 
 // On crée un nouveau router
 // https://expressjs.com/en/4x/api.html#express.router
@@ -22,4 +22,4 @@ router.patch('/users/:id', UsersController.modifyUser);
 router.put('/users/:id', UsersController.createOrModifyUser);
 router.delete('/users/:id', UsersController.deleteUser);
 
-export default router;
+module.exports = router;

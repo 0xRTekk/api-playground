@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "The backend server API for my todolist",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "jest --coverage",
     "start": "nodemon index.js"

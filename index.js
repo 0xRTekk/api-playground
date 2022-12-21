@@ -106,7 +106,7 @@
  */
 
 // Import du server
-import app from './app/server.js';
+const app = require('./app/server.js');
 // On déifnit le port
 const PORT = 3000;
 

@@ -1,5 +1,5 @@
-import { JSDOM } from 'jsdom';
-import DOMPurify from 'dompurify';
+const { JSDOM } = require('jsdom');
+const DOMPurify = require('dompurify');
 
 // On "émule" un context de navigateur pour fiare fonctionner la lib DOMPurify côté serveur
 // https://github.com/cure53/DOMPurify
@@ -21,4 +21,4 @@ const bodySanitizer = (req, res, next) => {
   next();
 };
 
-export default bodySanitizer;
+module.exports = bodySanitizer;
