@@ -9,12 +9,11 @@ const tasksController = {
   },
   getTaskById: (req, res) => {
     const taskId = parseInt(req.params.id, 10);
-
-    try {
-      const task = tasks.find((task) => task.id === taskId);
+    const task = tasks.find((task) => task.id === taskId);
+    if (task) {
       res.json(task);
-    } catch (error) {
-      res.status(404).end(error);
+    } else {
+      res.status(404).end('404 NOT FOUND');
     }
   },
   createTask: (req, res) => {
