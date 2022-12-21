@@ -1,4 +1,3 @@
-
 // Importing the NPM bcrypt package.
 import bcrypt from 'bcrypt';
 // We are setting salt rounds, higher is safer.
@@ -10,7 +9,6 @@ const UsersController = {
   // Retourne tous les utilisateurs
   getAllUsers: function (req, res) {
     try {
-
       // on nettoye le tableau pour ne pas renvoyer le mot de passe
       // (même s'il est hashé, c'est une mauvaise pratique)
       let usersReturn = [];

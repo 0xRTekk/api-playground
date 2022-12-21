@@ -58,8 +58,8 @@ const tasksController = {
       if (req.body.label) {
         task.label = req.body.label;
       }
-      if (req.body.done) {
-        task.done = req.body.done;
+      if (req.body.done !== null) {
+        task.done = req.body.done ? true : false;
       }
 
       res.send(task);
@@ -70,9 +70,9 @@ const tasksController = {
     const id = parseInt(req.params.id, 10);
     const task = tasks.find((task) => task.id === id);
     if (task) {
-      taskController.modifyTask(req, res);
+      tasksController.modifyTask(req, res);
     } else {
-      taskController.createTask(req, res);
+      tasksController.createTask(req, res);
     }
   },
 
