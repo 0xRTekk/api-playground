@@ -5,7 +5,13 @@ const tasksController = {
     if (!tasks) {
       return res.status(404).end();
     }
-    res.send(tasks);
+    // On recup les infos traitées par le middleware Auth pour en extraire l'utilisateur
+    const currentUser = req.headers.jwt_decoded;
+
+    // On filtre les tâches de l'utilisateur authentifié
+    const userTasks = tasks.filter((task) => task.userId === currentUser.id);
+
+    res.send(userTasks);
   },
   getTaskById: (req, res) => {
     const taskId = parseInt(req.params.id, 10);
